@@ -4,7 +4,7 @@ import { registerRoute } from "workbox-routing";
 import { CacheFirst, StaleWhileRevalidate } from "workbox-strategies";
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
 import { ExpirationPlugin } from "workbox-expiration";
-import { offlineFallback } from "workbox-recipes";
+import { offlineFallback, warmStrategyCache } from "workbox-recipes";
 
 // Precaches and routes the resources listed in the WB_MANIFEST
 precacheAndRoute(self.__WB_MANIFEST);
@@ -22,10 +22,15 @@ const pageCache = new CacheFirst({
   ],
 });
 
+warmStrategyCache({
+  urls:["/index.html", "/"],
+  strategy: pageCache
+})
+
 // Warms up the cache with specified URLs
 registerRoute(
   ({ request }) => request.mode === "navigate",
-  ({ event }) => pageCache.handle({ event })
+  pageCache
 );
 
 // Implements asset caching for styles, scripts, and workers
@@ -42,4 +47,4 @@ registerRoute(
 );
 
 // Fallback strategy for offline support
-offlineFallback();
+//offlineFallback();

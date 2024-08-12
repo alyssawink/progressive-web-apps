@@ -2,7 +2,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const path = require("path");
-const { GenerateSW } = require("workbox-webpack-plugin");
+const { GenerateSW , InjectManifest} = require("workbox-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -19,6 +19,10 @@ module.exports = {
       template: "./src/index.html", // Ensure this path is correct
       filename: "index.html",
       chunks: ["main"],
+    }),
+    new InjectManifest({
+      swSrc:"./src-sw.js",
+      swDest:"src-sw.js"
     }),
     new WebpackPwaManifest({
       fingerprints: false,
@@ -39,11 +43,11 @@ module.exports = {
         },
       ],
     }),
-    new GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true,
-      swDest: "src-sw.js",
-    }),
+    // new GenerateSW({
+    //   clientsClaim: true,
+    //   skipWaiting: true,
+    //   swDest: "src-sw.js",
+    // }),
   ],
   module: {
     rules: [
@@ -63,11 +67,11 @@ module.exports = {
       },
     ],
   },
-  devServer: {
-    static: {
-      directory: path.join(__dirname, "dist"),
-    },
-    compress: true,
-    port: 3000,
-  },
+  // devServer: {
+  //   static: {
+  //     directory: path.join(__dirname, "dist"),
+  //   },
+  //   compress: true,
+  //   port: 3000,
+  // },
 };

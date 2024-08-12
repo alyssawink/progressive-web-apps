@@ -13,6 +13,7 @@ This is a Progressive Web Application (PWA) that functions as a text editor. It 
 * Access your notes even when offline.
 
 ## Application Image
+![Screenshot 2024-08-12 at 5 32 45 PM](https://github.com/user-attachments/assets/af394848-3a9f-4593-89cd-0b774fecbb0c)
 
 
 ## Links

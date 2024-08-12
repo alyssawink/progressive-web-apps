@@ -18,6 +18,8 @@ This is a Progressive Web Application (PWA) that functions as a text editor. It 
 ## Links
 https://progressive-web-apps-te55.onrender.com
 
+https://github.com/alyssawink/progressive-web-apps
+
 ## Author
 Alyssa Hanewinkel
 
